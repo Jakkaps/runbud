@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import { AuthContext } from "../App";
 import { useHistory } from "react-router-dom";
 import "./RunsPage.css";
+import RunsList from "./RunList";
 
 const RunsPage: FunctionComponent = (): ReactElement => {
   const auth = useContext(AuthContext);
@@ -16,8 +17,8 @@ const RunsPage: FunctionComponent = (): ReactElement => {
 
   return (
     <div id={"container"}>
-      <p>Runs page</p>
-      <Button onClick={handleLogout} variant={"danger"}>
+      <RunsList />
+      <Button id="log-out-button" onClick={handleLogout} variant={"danger"}>
         Log out
       </Button>
     </div>
