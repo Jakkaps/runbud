@@ -14,7 +14,7 @@ const RunsListItem: FunctionComponent<RunsListItemProps> = ({
 }): ReactElement => {
   return (
     <ListGroup.Item id={"runs-list-container"}>
-      <h3>{formatDate(run.time)}</h3>
+      <h5>{formatDate(run.time)}</h5>
       <p className={"SubInfo"}>
         {run.pace.min + "-" + run.pace.max + " min/km"}
       </p>
