@@ -1,0 +1,23 @@
+.LoginPage {
+    height: 100%;
+    box-sizing: border-box;
+    background-size: cover;
+    background-image: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+    ), url("people_running.jpg");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.FirebaseUI {
+    display: inline-block;
+}
+
+#tagline {
+    color: white;
+    font-weight: bolder;
+    font-size: 48px;
+}

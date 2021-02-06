@@ -1,17 +1,24 @@
 import React from "react";
 import "./App.css";
 
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
 
-import {useAuthState} from 'react-firebase-hooks/auth';
-import LoginPage from "./LoginPage";
+import { useAuthState } from "react-firebase-hooks/auth";
+import LoginPage from "./Login/LoginPage";
+import { firebaseConfig } from "./FirebaseConfig";
 
-function App(){
-    const [user] = useAuthState(firebase.auth())
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+} else {
+  firebase.app();
+}
 
-    return user ? <div>Hei</div> : <LoginPage/>
+function App() {
+  const [user] = useAuthState(firebase.auth());
+
+  return !user ? <div className={"App"}>Hei</div> : <LoginPage />;
 }
 
 export default App;
