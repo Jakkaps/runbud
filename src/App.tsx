@@ -1,13 +1,16 @@
-import React from "react";
+import React, { FunctionComponent, ReactElement } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 
-import { useAuthState } from "react-firebase-hooks/auth";
 import LoginPage from "./Login/LoginPage";
 import { firebaseConfig } from "./FirebaseConfig";
+import RunsPage from "./Runs/RunsPage";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -15,10 +18,24 @@ if (!firebase.apps.length) {
   firebase.app();
 }
 
-function App() {
-  const [user] = useAuthState(firebase.auth());
+const auth = firebase.auth();
+export const AuthContext = React.createContext(auth);
 
-  return !user ? <div className={"App"}>Hei</div> : <LoginPage />;
-}
+const App: FunctionComponent = (): ReactElement => {
+  return (
+    <AuthContext.Provider value={auth}>
+      <Router>
+        <Switch>
+          <Route path={"/runs"}>
+            <RunsPage />
+          </Route>
+          <Route path={""}>
+            <LoginPage />
+          </Route>
+        </Switch>
+      </Router>
+    </AuthContext.Provider>
+  );
+};
 
 export default App;
