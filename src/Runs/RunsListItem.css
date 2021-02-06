@@ -1,0 +1,31 @@
+#runs-list-container {
+    display: block;
+    overflow: auto;
+    justify-content: flex-start;
+    padding: 16px;
+    width: 100%;
+    background-color: white;
+}
+
+#people{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 8px;
+    right: 16px;
+}
+
+#people-icon {
+    margin-left: 4px;
+}
+
+
+#go-along {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+}
+
+.SubInfo {
+    margin: 0;
+}

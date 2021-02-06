@@ -5,6 +5,6 @@ export interface Range {
 export interface Run {
   pace: Range;
   length: Range;
-  people: Range;
+  people: number;
   time: Date;
 }

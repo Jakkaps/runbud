@@ -8,6 +8,8 @@ import firebase from "firebase/app";
 import "firebase/database";
 import RunsListItem from "./RunsListItem";
 import { Range, Run } from "./Run";
+import "./RunsList.css";
+import { ListGroup } from "react-bootstrap";
 
 const RunsList: FunctionComponent = (): ReactElement => {
   const range: Range = { min: 2, max: 3 };
@@ -24,7 +26,7 @@ const RunsList: FunctionComponent = (): ReactElement => {
           newRuns.push({
             time: new Date(),
             pace: r.pace,
-            people: range,
+            people: 4,
             length: range,
           });
         });
@@ -40,7 +42,7 @@ const RunsList: FunctionComponent = (): ReactElement => {
     return <RunsListItem run={run} />;
   });
 
-  return <ul>{runsListItems}</ul>;
+  return <ListGroup id={"list-container"}>{runsListItems}</ListGroup>;
 };
 
 export default RunsList;
