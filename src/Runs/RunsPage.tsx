@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import { AuthContext } from "../App";
 import { useHistory } from "react-router-dom";
 import "./RunsPage.css";
-import RunsList from "./RunList";
+import RunsList from "./RunsList";
 
 const RunsPage: FunctionComponent = (): ReactElement => {
   const auth = useContext(AuthContext);
