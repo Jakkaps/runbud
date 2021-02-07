@@ -29,10 +29,10 @@ const RunsPage: FunctionComponent = (): ReactElement => {
             id={"nav-button"}
             onClick={(): void => history.push("/add")}
           >
-            Add run <BsPlus size={30} />
+            <BsPlus size={30} />
           </Button>
           <Button size={"lg"} onClick={handleLogout} id={"nav-button"}>
-            Log out <BsBoxArrowRight id={"logout-icon"} size={"30"} />
+            <BsBoxArrowRight size={"30"} />
           </Button>
         </Form>
       </Navbar>
