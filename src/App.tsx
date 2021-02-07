@@ -11,6 +11,7 @@ import "firebase/auth";
 import LoginPage from "./Login/LoginPage";
 import { firebaseConfig } from "./FirebaseConfig";
 import RunsPage from "./Runs/RunsPage";
+import AddPage from "./Add/AddPage";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -28,6 +29,9 @@ const App: FunctionComponent = (): ReactElement => {
         <Switch>
           <Route path={"/runs"}>
             <RunsPage />
+          </Route>
+          <Route path={"/add"}>
+            <AddPage />
           </Route>
           <Route path={""}>
             <LoginPage />
