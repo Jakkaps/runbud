@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import "./RunsPage.css";
 import RunsList from "./RunsList";
 import { Button, Navbar, Form } from "react-bootstrap";
-import { BsPlus } from "react-icons/bs";
+import { BsBoxArrowRight, BsPlus } from "react-icons/bs";
 
 const RunsPage: FunctionComponent = (): ReactElement => {
   const auth = useContext(AuthContext);
@@ -29,10 +29,10 @@ const RunsPage: FunctionComponent = (): ReactElement => {
             id={"nav-button"}
             onClick={(): void => history.push("/add")}
           >
-            <BsPlus size={30} /> Add Run
+            Add run <BsPlus size={30} />
           </Button>
           <Button size={"lg"} onClick={handleLogout} id={"nav-button"}>
-            Log out
+            Log out <BsBoxArrowRight id={"logout-icon"} size={"30"} />
           </Button>
         </Form>
       </Navbar>

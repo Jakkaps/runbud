@@ -14,6 +14,10 @@
     width: 100%;
 }
 
+#logout-icon {
+    margin-left: 12px;
+}
+
 #nav-button{
     display: flex;
     align-items: center;
