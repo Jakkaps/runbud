@@ -1,0 +1,13 @@
+#add-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: 64px;
+}
+
+#add-run-button {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+}
