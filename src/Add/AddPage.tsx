@@ -8,8 +8,11 @@ import DateFnsUtils from "@date-io/date-fns";
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import LengthSlider from "./LengthSlider";
+import { addRun } from "../Shared/API";
+import { useHistory } from "react-router-dom";
 
 const AddPage: FunctionComponent = (): ReactElement => {
+  const history = useHistory();
   const [pace, setPace] = useState({ min: "5:00", max: "6:00" });
   const [date, setDate] = useState(new Date());
   const [length, setLength] = useState({ min: 5, max: 10 });
@@ -26,6 +29,11 @@ const AddPage: FunctionComponent = (): ReactElement => {
 
   const handleLengthSliderChange = (min: number, max: number) => {
     setLength({ min, max });
+  };
+
+  const handleAddRunClicked = () => {
+    addRun({ length: length, pace: pace, time: date, people: 1 });
+    history.push("/runs");
   };
 
   return (
@@ -47,7 +55,12 @@ const AddPage: FunctionComponent = (): ReactElement => {
       <FormItem title={"Length (km)"}>
         <LengthSlider length={length} onChange={handleLengthSliderChange} />
       </FormItem>
-      <Button variant={"success"} size={"lg"} id={"add-run-button"}>
+      <Button
+        variant={"success"}
+        size={"lg"}
+        id={"add-run-button"}
+        onClick={handleAddRunClicked}
+      >
         <BsPlus size={"30"} />
         Add Run
       </Button>

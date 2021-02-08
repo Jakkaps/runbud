@@ -1,10 +1,10 @@
 import React, { FunctionComponent, ReactElement } from "react";
 import { Slider } from "@material-ui/core";
-import { Range } from "../Runs/Run";
+import { Range } from "../Shared/Run";
 
 interface LengthSliderProps {
   onChange: (min: number, max: number) => void;
-  length: Range;
+  length: Range<number>;
 }
 
 const LengthSlider: FunctionComponent<LengthSliderProps> = ({

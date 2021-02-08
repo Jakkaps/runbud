@@ -7,12 +7,12 @@ import React, {
 import firebase from "firebase/app";
 import "firebase/database";
 import RunsListItem from "./RunsListItem";
-import { Range, Run } from "./Run";
+import { Range, Run } from "../Shared/Run";
 import "./RunsList.css";
 import { ListGroup } from "react-bootstrap";
 
 const RunsList: FunctionComponent = (): ReactElement => {
-  const range: Range = { min: 2, max: 3 };
+  const range: Range<number> = { min: 2, max: 3 };
   const [runs, setRuns] = useState(new Array<Run>());
 
   useEffect(() => {

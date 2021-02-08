@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement } from "react";
-import { Run } from "./Run";
+import { Run } from "../Shared/Run";
 import { BsFillPersonFill } from "react-icons/bs";
 import { ListGroup, Button } from "react-bootstrap";
 import "./RunsListItem.css";
