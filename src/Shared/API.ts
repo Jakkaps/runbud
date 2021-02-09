@@ -44,14 +44,23 @@ export function subscribeToRuns(callback: (runs: Run[]) => void) {
     "value",
     (snapshot) => {
       let newRuns: Run[] = [];
-      snapshot.forEach((run) => {
-        const key = run.key;
+      snapshot.forEach((runSnapshot) => {
+        const key = runSnapshot.key;
         if (typeof key === "string") {
-          const r = run.val();
+          let people: string[] = [];
+          runSnapshot.child("users").forEach((userSnapshot) => {
+            console.log("Yes 1 use");
+            const userId = userSnapshot.key;
+            if (typeof userId === "string") {
+              people.push(userId);
+            }
+          });
+
+          const r = runSnapshot.val();
           newRuns.push({
             time: new Date(r.time),
             pace: r.pace,
-            people: r.people,
+            people: people,
             length: r.length,
             id: key,
           });

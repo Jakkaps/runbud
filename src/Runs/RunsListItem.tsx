@@ -25,7 +25,7 @@ const RunsListItem: FunctionComponent<RunsListItemProps> = ({
         {run.length.min + "-" + run.length.max + " km"}
       </p>
       <p id={"people"}>
-        {run.people} <BsFillPersonFill id={"people-icon"} />
+        {run.people.length} <BsFillPersonFill id={"people-icon"} />
       </p>
       <Button
         id={"go-along"}

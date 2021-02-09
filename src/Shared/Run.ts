@@ -5,7 +5,7 @@ export interface Range<type> {
 export interface Run {
   pace: Range<number>;
   length: Range<number>;
-  people: number;
+  people: string[];
   time: Date;
   id: string;
 }

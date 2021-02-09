@@ -42,7 +42,7 @@ const AddPage: FunctionComponent = (): ReactElement => {
   const handleAddRunClicked = () => {
     if (typeof userId === "string") {
       addRun(
-        { length: length, pace: pace, time: date, people: 0, id: "" },
+        { length: length, pace: pace, time: date, people: [], id: "" },
         userId
       );
       history.push("/runs");
