@@ -20,3 +20,27 @@ export function addRun(run: Run): void {
       time: run.time.toISOString(),
     });
 }
+
+export function subscribeToRuns(callback: (runs: Run[]) => void) {
+  let runsRef = firebase.database().ref("runs/");
+  runsRef.on(
+    "value",
+    (snapshot) => {
+      let newRuns: Run[] = [];
+      snapshot.forEach((run) => {
+        const r = run.val();
+        newRuns.push({
+          time: new Date(r.time),
+          pace: r.pace,
+          people: r.people,
+          length: r.length,
+        });
+      });
+      console.log("Got update");
+      callback(newRuns);
+    },
+    (e) => {
+      console.error(e);
+    }
+  );
+}
