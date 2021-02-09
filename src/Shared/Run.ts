@@ -7,4 +7,5 @@ export interface Run {
   length: Range<number>;
   people: number;
   time: Date;
+  id: string;
 }

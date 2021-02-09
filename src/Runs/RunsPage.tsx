@@ -12,12 +12,14 @@ import RunsList from "./RunsList";
 import { Button, Navbar, Form } from "react-bootstrap";
 import { BsBoxArrowRight, BsPlus } from "react-icons/bs";
 import { Run } from "../Shared/Run";
-import { subscribeToRuns } from "../Shared/API";
+import { addUserToRun, subscribeToRuns } from "../Shared/API";
 
 const RunsPage: FunctionComponent = (): ReactElement => {
   const auth = useContext(AuthContext);
   const history = useHistory();
   const [runs, setRuns] = useState(new Array<Run>());
+  const userId = useContext(AuthContext).currentUser?.uid;
+
   const handleRunsChanged = (newRuns: Run[]): void => {
     setRuns(newRuns);
   };
@@ -30,6 +32,12 @@ const RunsPage: FunctionComponent = (): ReactElement => {
     auth.signOut().then(() => {
       history.push("/");
     });
+  };
+
+  const handleGoAlongClicked = (runId: string): void => {
+    if (typeof userId === "string") {
+      addUserToRun(userId, runId);
+    }
   };
 
   return (
@@ -52,7 +60,7 @@ const RunsPage: FunctionComponent = (): ReactElement => {
           </Button>
         </Form>
       </Navbar>
-      <RunsList runs={runs} />
+      <RunsList runs={runs} goAlongClicked={handleGoAlongClicked} />
     </div>
   );
 };

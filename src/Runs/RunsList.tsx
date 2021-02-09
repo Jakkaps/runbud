@@ -7,11 +7,15 @@ import { ListGroup } from "react-bootstrap";
 
 interface RunsListProps {
   runs: Run[];
+  goAlongClicked: (runId: string) => void;
 }
 
-const RunsList: FunctionComponent<RunsListProps> = ({ runs }): ReactElement => {
+const RunsList: FunctionComponent<RunsListProps> = ({
+  runs,
+  goAlongClicked,
+}): ReactElement => {
   const runsListItems: ReactElement[] = runs.map((run) => {
-    return <RunsListItem run={run} />;
+    return <RunsListItem run={run} goAlongClicked={goAlongClicked} />;
   });
 
   return <ListGroup id={"list-container"}>{runsListItems}</ListGroup>;

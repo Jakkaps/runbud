@@ -25,10 +25,17 @@ export function addRun(run: Run, userId: string): void {
 }
 
 export function addUserToRun(userId: string, runId: string) {
-  firebase
-    .database()
-    .ref("/runs/" + runId + "/users")
-    .push(userId);
+  const ref = firebase.database().ref("/runs/" + runId + "/users/" + userId);
+  let newUser = false;
+  ref
+    .once("value", (snapshot) => {
+      newUser = !snapshot.exists();
+    })
+    .then(() => {
+      if (newUser) {
+        ref.set({ dateJoined: new Date().toISOString() }).then(() => {});
+      }
+    });
 }
 
 export function subscribeToRuns(callback: (runs: Run[]) => void) {
@@ -38,15 +45,18 @@ export function subscribeToRuns(callback: (runs: Run[]) => void) {
     (snapshot) => {
       let newRuns: Run[] = [];
       snapshot.forEach((run) => {
-        const r = run.val();
-        newRuns.push({
-          time: new Date(r.time),
-          pace: r.pace,
-          people: r.people,
-          length: r.length,
-        });
+        const key = run.key;
+        if (typeof key === "string") {
+          const r = run.val();
+          newRuns.push({
+            time: new Date(r.time),
+            pace: r.pace,
+            people: r.people,
+            length: r.length,
+            id: key,
+          });
+        }
       });
-      console.log("Got update");
       callback(newRuns);
     },
     (e) => {
