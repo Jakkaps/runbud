@@ -17,6 +17,6 @@ export function addRun(run: Run): void {
         max: run.length.max,
       },
       people: run.people,
-      time: run.time,
+      time: run.time.toISOString(),
     });
 }
