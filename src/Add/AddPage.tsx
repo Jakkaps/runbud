@@ -1,4 +1,9 @@
-import React, { FunctionComponent, ReactElement, useState } from "react";
+import React, {
+  FunctionComponent,
+  ReactElement,
+  useContext,
+  useState,
+} from "react";
 import FormItem from "./FormItem";
 import "./AddPage.css";
 import { Button } from "react-bootstrap";
@@ -10,12 +15,15 @@ import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import LengthSlider from "./LengthSlider";
 import { addRun } from "../Shared/API";
 import { useHistory } from "react-router-dom";
+import { AuthContext } from "../App";
 
 const AddPage: FunctionComponent = (): ReactElement => {
   const history = useHistory();
   const [pace, setPace] = useState({ min: 5.5, max: 6 });
   const [date, setDate] = useState(new Date());
   const [length, setLength] = useState({ min: 5, max: 10 });
+
+  const userId = useContext(AuthContext).currentUser?.uid;
 
   const handlePaceSliderChange = (min: number, max: number) => {
     setPace({ min, max });
@@ -32,8 +40,10 @@ const AddPage: FunctionComponent = (): ReactElement => {
   };
 
   const handleAddRunClicked = () => {
-    addRun({ length: length, pace: pace, time: date, people: 1 });
-    history.push("/runs");
+    if (typeof userId === "string") {
+      addRun({ length: length, pace: pace, time: date, people: 1 }, userId);
+      history.push("/runs");
+    }
   };
 
   return (

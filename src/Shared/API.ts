@@ -3,8 +3,8 @@ import firebase from "firebase/app";
 import "firebase/database";
 
 // TODO: Add error handling
-export function addRun(run: Run): void {
-  firebase
+export function addRun(run: Run, userId: string): void {
+  const pushedRun = firebase
     .database()
     .ref("/runs")
     .push({
@@ -16,9 +16,19 @@ export function addRun(run: Run): void {
         min: run.length.min,
         max: run.length.max,
       },
-      people: run.people,
       time: run.time.toISOString(),
     });
+
+  if (typeof pushedRun.key === "string") {
+    addUserToRun(userId, pushedRun.key);
+  }
+}
+
+export function addUserToRun(userId: string, runId: string) {
+  firebase
+    .database()
+    .ref("/runs/" + runId + "/users")
+    .push(userId);
 }
 
 export function subscribeToRuns(callback: (runs: Run[]) => void) {
