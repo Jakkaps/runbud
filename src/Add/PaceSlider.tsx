@@ -1,43 +1,32 @@
 import React, { FunctionComponent, ReactElement, useState } from "react";
 import { Slider } from "@material-ui/core";
 import "./FormItem.css";
+import { toText } from "../Shared/PaceHelper";
 
 interface PaceSliderProps {
-  onChange: (min: string, max: string) => void;
+  onChange: (min: number, max: number) => void;
 }
 
 const PaceSlider: FunctionComponent<PaceSliderProps> = ({
   onChange,
 }): ReactElement => {
-  const [pace, setPace] = useState([18, 24]);
+  const [pace, setPace] = useState([5.5, 6]);
+
   const handleChange = (event: any, newValue: any) => {
     setPace(newValue);
-    const min = paceText(newValue[0]);
-    const max = paceText(newValue[1]);
-    onChange(min, max);
-  };
-
-  const paceText = function (value: number): string {
-    let paceText = Math.floor(value / 6) + ":" + (value % 6) * 10;
-
-    // 2:0 -> 2:00
-    if (paceText.endsWith(":0")) {
-      paceText += "0";
-    }
-
-    return paceText;
+    onChange(newValue[0], newValue[1]);
   };
 
   return (
     <Slider
       id={"slider"}
       value={pace}
-      step={1}
-      min={12}
-      max={60}
+      step={1 / 6}
+      min={2}
+      max={10}
       onChange={handleChange}
       valueLabelDisplay="on"
-      valueLabelFormat={paceText}
+      valueLabelFormat={toText}
     />
   );
 };

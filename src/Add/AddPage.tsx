@@ -13,11 +13,11 @@ import { useHistory } from "react-router-dom";
 
 const AddPage: FunctionComponent = (): ReactElement => {
   const history = useHistory();
-  const [pace, setPace] = useState({ min: "5:00", max: "6:00" });
+  const [pace, setPace] = useState({ min: 5.5, max: 6 });
   const [date, setDate] = useState(new Date());
   const [length, setLength] = useState({ min: 5, max: 10 });
 
-  const handlePaceSliderChange = (min: string, max: string) => {
+  const handlePaceSliderChange = (min: number, max: number) => {
     setPace({ min, max });
   };
 

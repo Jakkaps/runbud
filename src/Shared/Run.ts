@@ -3,7 +3,7 @@ export interface Range<type> {
   max: type;
 }
 export interface Run {
-  pace: Range<string>;
+  pace: Range<number>;
   length: Range<number>;
   people: number;
   time: Date;
