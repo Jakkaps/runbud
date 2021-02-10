@@ -31,3 +31,4 @@ yarn-error.log*
 
 # firebase apikey etc
 src/FireBaseConfig.ts
+src/Shared/APIKeys.ts
