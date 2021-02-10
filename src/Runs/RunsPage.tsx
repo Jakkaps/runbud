@@ -9,7 +9,7 @@ import { AuthContext } from "../App";
 import { useHistory } from "react-router-dom";
 import "./RunsPage.css";
 import RunsList from "./RunsList";
-import { Button, Navbar, Form } from "react-bootstrap";
+import { Button, Navbar, Form, Spinner } from "react-bootstrap";
 import { BsBoxArrowRight, BsPlus } from "react-icons/bs";
 import { Run } from "../Shared/Run";
 import {
@@ -66,6 +66,27 @@ const RunsPage: FunctionComponent = (): ReactElement => {
       participationButtonClicked={handleLeaveClicked}
     />
   ) : null;
+  const exploreRunsList = exploreRuns.length ? (
+    <RunsList
+      title={"Explore"}
+      participationButtonText={"Go along"}
+      participationButtonStyle={"primary"}
+      runs={exploreRuns}
+      participationButtonClicked={handleGoAlongClicked}
+    />
+  ) : null;
+
+  const runsLists =
+    exploreRunsList || myRunsList ? (
+      <div style={{ width: "100%" }}>
+        {myRunsList}
+        {exploreRunsList}
+      </div>
+    ) : (
+      <div id={"spinner-container"}>
+        <Spinner animation={"border"} variant={"primary"} />
+      </div>
+    );
 
   const navBarStyle = "";
 
@@ -96,14 +117,7 @@ const RunsPage: FunctionComponent = (): ReactElement => {
         </Form>
         <Navbar.Brand id={"navbar-brand"}>RunBud</Navbar.Brand>
       </Navbar>
-      {myRunsList}
-      <RunsList
-        title={"Explore"}
-        participationButtonText={"Go along"}
-        participationButtonStyle={"primary"}
-        runs={exploreRuns}
-        participationButtonClicked={handleGoAlongClicked}
-      />
+      {runsLists}
     </div>
   );
 };
