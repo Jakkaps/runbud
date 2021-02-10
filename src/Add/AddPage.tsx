@@ -4,18 +4,14 @@ import React, {
   useContext,
   useState,
 } from "react";
-import FormItem from "./FormItem";
-import "./AddPage.css";
-import { Button } from "react-bootstrap";
-import { BsPlus } from "react-icons/bs";
-import PaceSlider from "./PaceSlider";
-import DateFnsUtils from "@date-io/date-fns";
-import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+
 import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
-import LengthSlider from "./LengthSlider";
 import { addRun } from "../Shared/API";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../App";
+import EditInfoCard from "./EditInfoCard";
+import "./AddPage.css";
+import StartingPointSelector from "./StartingPointSelector";
 
 const AddPage: FunctionComponent = (): ReactElement => {
   const history = useHistory();
@@ -25,7 +21,7 @@ const AddPage: FunctionComponent = (): ReactElement => {
 
   const userId = useContext(AuthContext).currentUser?.uid;
 
-  const handlePaceSliderChange = (min: number, max: number) => {
+  const handlePaceSliderChange = (min: number, max: number): void => {
     setPace({ min, max });
   };
 
@@ -35,11 +31,11 @@ const AddPage: FunctionComponent = (): ReactElement => {
     }
   };
 
-  const handleLengthSliderChange = (min: number, max: number) => {
+  const handleLengthSliderChange = (min: number, max: number): void => {
     setLength({ min, max });
   };
 
-  const handleAddRunClicked = () => {
+  const handleAddRunClicked = (): void => {
     if (typeof userId === "string") {
       addRun(
         { length: length, pace: pace, time: date, people: [], id: "" },
@@ -49,34 +45,22 @@ const AddPage: FunctionComponent = (): ReactElement => {
     }
   };
 
+  const handleStartingPointSelected = (lat: number, long: number): void => {
+    console.log(`lag: ${lat}, long: ${long}`);
+  };
+
   return (
     <div id={"add-container"}>
-      <FormItem title={"Time"}>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <DateTimePicker
-            fullWidth
-            id={"date-time-picker"}
-            value={new Date()}
-            disablePast
-            onChange={handleDateChanged}
-          />
-        </MuiPickersUtilsProvider>
-      </FormItem>
-      <FormItem title={"Pace (m/km)"}>
-        <PaceSlider onChange={handlePaceSliderChange} />
-      </FormItem>
-      <FormItem title={"Length (km)"}>
-        <LengthSlider length={length} onChange={handleLengthSliderChange} />
-      </FormItem>
-      <Button
-        variant={"success"}
-        size={"lg"}
-        id={"add-run-button"}
-        onClick={handleAddRunClicked}
-      >
-        <BsPlus size={"30"} />
-        Add Run
-      </Button>
+      <EditInfoCard
+        defaultLength={length}
+        handlePaceSliderChange={handlePaceSliderChange}
+        handleLengthSliderChange={handleLengthSliderChange}
+        handleDateChanged={handleDateChanged}
+        handleAddRunClicked={handleAddRunClicked}
+      />
+      <StartingPointSelector
+        handlePointSelected={handleStartingPointSelected}
+      />
     </div>
   );
 };
