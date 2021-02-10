@@ -60,7 +60,11 @@ const RunsPage: FunctionComponent = (): ReactElement => {
           </Button>
         </Form>
       </Navbar>
-      <RunsList runs={runs} goAlongClicked={handleGoAlongClicked} />
+      <RunsList
+        title={"Explore"}
+        runs={runs}
+        participationButtonClicked={handleGoAlongClicked}
+      />
     </div>
   );
 };

@@ -6,3 +6,12 @@
    padding: 16px;
    margin-top: 32px;
 }
+
+#list-group-title {
+   width: 100%;
+   text-align: start;
+}
+
+#list-group {
+   width: 100%;
+}

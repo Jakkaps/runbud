@@ -6,19 +6,31 @@ import "./RunsList.css";
 import { ListGroup } from "react-bootstrap";
 
 interface RunsListProps {
+  title: string;
   runs: Run[];
-  goAlongClicked: (runId: string) => void;
+  participationButtonClicked: (runId: string) => void;
 }
 
 const RunsList: FunctionComponent<RunsListProps> = ({
+  title,
   runs,
-  goAlongClicked,
+  participationButtonClicked,
 }): ReactElement => {
   const runsListItems: ReactElement[] = runs.map((run) => {
-    return <RunsListItem run={run} goAlongClicked={goAlongClicked} />;
+    return (
+      <RunsListItem
+        run={run}
+        participationButtonClicked={participationButtonClicked}
+      />
+    );
   });
 
-  return <ListGroup id={"list-container"}>{runsListItems}</ListGroup>;
+  return (
+    <div id={"list-container"}>
+      <h6 id={"list-group-title"}>{title}</h6>
+      <ListGroup id={"list-group"}>{runsListItems}</ListGroup>
+    </div>
+  );
 };
 
 export default RunsList;
