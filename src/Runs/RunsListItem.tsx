@@ -8,12 +8,16 @@ import { toText } from "../Shared/PaceHelper";
 
 interface RunsListItemProps {
   run: Run;
+  participationButtonStyle: string;
+  participationButtonText: string;
   participationButtonClicked: (runId: string) => void;
 }
 
 const RunsListItem: FunctionComponent<RunsListItemProps> = ({
   run,
   participationButtonClicked,
+  participationButtonStyle,
+  participationButtonText,
 }): ReactElement => {
   return (
     <ListGroup.Item id={"runs-list-container"}>
@@ -29,12 +33,12 @@ const RunsListItem: FunctionComponent<RunsListItemProps> = ({
       </p>
       <Button
         id={"go-along"}
-        variant={"primary"}
+        variant={participationButtonStyle}
         onClick={() => {
           participationButtonClicked(run.id);
         }}
       >
-        Go along
+        {participationButtonText}
       </Button>
     </ListGroup.Item>
   );

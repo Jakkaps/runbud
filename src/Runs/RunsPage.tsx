@@ -61,7 +61,16 @@ const RunsPage: FunctionComponent = (): ReactElement => {
         </Form>
       </Navbar>
       <RunsList
+        title={"Your runs"}
+        participationButtonText={"Leave"}
+        participationButtonStyle={"danger"}
+        runs={runs}
+        participationButtonClicked={(id) => {}}
+      />
+      <RunsList
         title={"Explore"}
+        participationButtonText={"Go along"}
+        participationButtonStyle={"primary"}
         runs={runs}
         participationButtonClicked={handleGoAlongClicked}
       />

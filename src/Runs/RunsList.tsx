@@ -7,27 +7,33 @@ import { ListGroup } from "react-bootstrap";
 
 interface RunsListProps {
   title: string;
+  participationButtonStyle: string;
+  participationButtonText: string;
   runs: Run[];
   participationButtonClicked: (runId: string) => void;
 }
 
 const RunsList: FunctionComponent<RunsListProps> = ({
   title,
+  participationButtonStyle,
   runs,
   participationButtonClicked,
+  participationButtonText,
 }): ReactElement => {
   const runsListItems: ReactElement[] = runs.map((run) => {
     return (
       <RunsListItem
         run={run}
         participationButtonClicked={participationButtonClicked}
+        participationButtonStyle={participationButtonStyle}
+        participationButtonText={participationButtonText}
       />
     );
   });
 
   return (
     <div id={"list-container"}>
-      <h6 id={"list-group-title"}>{title}</h6>
+      <p id={"list-group-title"}>{title}</p>
       <ListGroup id={"list-group"}>{runsListItems}</ListGroup>
     </div>
   );
