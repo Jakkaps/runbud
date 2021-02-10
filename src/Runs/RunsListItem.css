@@ -9,21 +9,30 @@
 
 #people{
     display: flex;
+    margin: 0;
+    padding-top: 12px;
     align-items: center;
-    position: absolute;
-    top: 8px;
-    right: 16px;
 }
 
 #people-icon {
     margin-left: 4px;
 }
 
-
-#go-along {
+#participation-button {
     position: absolute;
     right: 16px;
     bottom: 16px;
+    margin-right: 8px;
+}
+
+#map-icon {
+    margin-right: 8px;
+}
+
+#map-button{
+    position: absolute;
+    right: 16px;
+    top: 16px;
 }
 
 .SubInfo {

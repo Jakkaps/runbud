@@ -70,7 +70,7 @@ const RunsPage: FunctionComponent = (): ReactElement => {
     <RunsList
       title={"Explore"}
       participationButtonText={"Go along"}
-      participationButtonStyle={"primary"}
+      participationButtonStyle={"success"}
       runs={exploreRuns}
       participationButtonClicked={handleGoAlongClicked}
     />
