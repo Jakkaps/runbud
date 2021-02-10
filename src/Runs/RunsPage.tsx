@@ -65,28 +65,34 @@ const RunsPage: FunctionComponent = (): ReactElement => {
     />
   ) : null;
 
+  const navBarStyle = "";
+
   return (
     <div id={"container"}>
-      <Navbar className="bg-light justify-content-between" id={"navbar"}>
+      <Navbar
+        bg={navBarStyle}
+        className={"justify-content-between"}
+        id={"navbar"}
+      >
         <Form inline>
           <Button
             size={"lg"}
             id={"nav-button"}
-            variant={"light"}
+            variant={navBarStyle}
             onClick={(): void => history.push("/add")}
           >
             <BsPlus size={30} />
           </Button>
           <Button
             size={"lg"}
-            variant={"light"}
+            variant={navBarStyle}
             onClick={handleLogout}
             id={"nav-button"}
           >
             <BsBoxArrowRight size={"30"} />
           </Button>
         </Form>
-        <Navbar.Brand>RunBud</Navbar.Brand>
+        <Navbar.Brand id={"navbar-brand"}>RunBud</Navbar.Brand>
       </Navbar>
       {myRunsList}
       <RunsList
