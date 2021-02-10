@@ -23,11 +23,7 @@ const RunsPage: FunctionComponent = (): ReactElement => {
   const history = useHistory();
   const [exploreRuns, setExploreRuns] = useState(new Array<Run>());
   const [myRuns, setMyRuns] = useState(new Array<Run>());
-  const potentialId = useContext(AuthContext).currentUser?.uid;
-  let userId = "";
-  if (typeof potentialId === "string") {
-    userId = potentialId;
-  }
+  const userId = useContext(AuthContext).currentUser?.uid;
 
   const handleExploreRunsChanged = (newRuns: Run[]): void => {
     setExploreRuns(newRuns);
@@ -38,8 +34,10 @@ const RunsPage: FunctionComponent = (): ReactElement => {
   };
 
   useEffect(() => {
-    subscribeToRuns(handleExploreRunsChanged, handleMyRunsChanged, userId);
-  }, []);
+    if (userId) {
+      subscribeToRuns(handleExploreRunsChanged, handleMyRunsChanged, userId);
+    }
+  }, [userId]);
 
   const handleLogout = function (): void {
     auth.signOut().then(() => {
@@ -48,11 +46,15 @@ const RunsPage: FunctionComponent = (): ReactElement => {
   };
 
   const handleGoAlongClicked = (runId: string): void => {
-    addUserToRun(userId, runId);
+    if (userId) {
+      addUserToRun(userId, runId);
+    }
   };
 
   const handleLeaveClicked = (runId: string): void => {
-    removeUserFromRun(userId, runId);
+    if (userId) {
+      removeUserFromRun(userId, runId);
+    }
   };
 
   const myRunsList = myRuns.length ? (

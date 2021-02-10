@@ -68,7 +68,6 @@ export function subscribeToRuns(
         if (typeof key === "string") {
           let people: string[] = [];
           runSnapshot.child("users").forEach((userSnapshot) => {
-            console.log("Yes 1 use");
             const userId = userSnapshot.key;
             if (typeof userId === "string") {
               people.push(userId);
@@ -76,7 +75,9 @@ export function subscribeToRuns(
           });
 
           const r = runSnapshot.val();
+          console.log(userId);
           if (people.includes(userId)) {
+            console.log("myruns");
             myRuns.push({
               time: new Date(r.time),
               pace: r.pace,
