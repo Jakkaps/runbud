@@ -35,7 +35,7 @@ const RunsListItem: FunctionComponent<RunsListItemProps> = ({
     status: google.maps.DirectionsStatus
   ) => {
     if (status == "OK") {
-      setDistanceText(response.routes[0].legs[0].distance.text);
+      setDistanceText(response.routes[0].legs[0].distance.text + " away");
     }
   };
 
@@ -43,7 +43,7 @@ const RunsListItem: FunctionComponent<RunsListItemProps> = ({
     if (userPosition.lat !== 0) {
       calculateDistance(userPosition, run.startingPoint, distanceCallback);
     }
-  }, [userPosition]);
+  }, [userPosition, run]);
 
   const openRunInMaps = () => {
     window.open(
