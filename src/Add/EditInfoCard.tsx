@@ -11,7 +11,8 @@ import { BsPlus } from "react-icons/bs";
 import "./EditInfoCard.css";
 
 interface EditInfoProps {
-  defaultLength: Range<number>;
+  length: Range<number>;
+  date: Date;
   handlePaceSliderChange: (min: number, max: number) => void;
   handleLengthSliderChange: (min: number, max: number) => void;
   handleDateChanged: (value: MaterialUiPickersDate) => void;
@@ -23,7 +24,8 @@ const EditInfoCard: FunctionComponent<EditInfoProps> = ({
   handlePaceSliderChange,
   handleDateChanged,
   handleLengthSliderChange,
-  defaultLength,
+  length,
+  date,
 }): ReactElement => {
   return (
     <div id={"add-info-card-container"}>
@@ -31,7 +33,7 @@ const EditInfoCard: FunctionComponent<EditInfoProps> = ({
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <DateTimePicker
             fullWidth
-            value={new Date()}
+            value={date}
             disablePast
             onChange={handleDateChanged}
           />
@@ -41,10 +43,7 @@ const EditInfoCard: FunctionComponent<EditInfoProps> = ({
         <PaceSlider onChange={handlePaceSliderChange} />
       </FormItem>
       <FormItem title={"Length (km)"}>
-        <LengthSlider
-          length={defaultLength}
-          onChange={handleLengthSliderChange}
-        />
+        <LengthSlider length={length} onChange={handleLengthSliderChange} />
       </FormItem>
       <Button
         variant={"success"}

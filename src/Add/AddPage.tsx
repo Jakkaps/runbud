@@ -42,7 +42,7 @@ const AddPage: FunctionComponent = (): ReactElement => {
 
   const handleDateChanged = (value: MaterialUiPickersDate): void => {
     if (value !== null) {
-      setDate(new Date(value.getDate()));
+      setDate(new Date(value.toISOString()));
     }
   };
 
@@ -85,7 +85,8 @@ const AddPage: FunctionComponent = (): ReactElement => {
   return (
     <div id={"add-container"}>
       <EditInfoCard
-        defaultLength={length}
+        length={length}
+        date={date}
         handlePaceSliderChange={handlePaceSliderChange}
         handleLengthSliderChange={handleLengthSliderChange}
         handleDateChanged={handleDateChanged}
