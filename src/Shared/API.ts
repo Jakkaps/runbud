@@ -38,12 +38,27 @@ export function addUserToRun(userId: string, runId: string) {
     });
 }
 
-export function subscribeToRuns(callback: (runs: Run[]) => void) {
+export function removeUserFromRun(userId: string, runId: string) {
+  firebase
+    .database()
+    .ref("/runs/" + runId + "/users/" + userId)
+    .remove((e) => {
+      console.log(e);
+    })
+    .then((r) => {});
+}
+
+export function subscribeToRuns(
+  exploreRunsCallback: (runs: Run[]) => void,
+  myRunsCallback: (runs: Run[]) => void,
+  userId: string
+) {
   let runsRef = firebase.database().ref("runs/");
   runsRef.on(
     "value",
     (snapshot) => {
-      let newRuns: Run[] = [];
+      let exploreRuns: Run[] = [];
+      let myRuns: Run[] = [];
       snapshot.forEach((runSnapshot) => {
         const key = runSnapshot.key;
         if (typeof key === "string") {
@@ -57,16 +72,27 @@ export function subscribeToRuns(callback: (runs: Run[]) => void) {
           });
 
           const r = runSnapshot.val();
-          newRuns.push({
-            time: new Date(r.time),
-            pace: r.pace,
-            people: people,
-            length: r.length,
-            id: key,
-          });
+          if (people.includes(userId)) {
+            myRuns.push({
+              time: new Date(r.time),
+              pace: r.pace,
+              people: people,
+              length: r.length,
+              id: key,
+            });
+          } else {
+            exploreRuns.push({
+              time: new Date(r.time),
+              pace: r.pace,
+              people: people,
+              length: r.length,
+              id: key,
+            });
+          }
         }
       });
-      callback(newRuns);
+      exploreRunsCallback(exploreRuns);
+      myRunsCallback(myRuns);
     },
     (e) => {
       console.error(e);

@@ -12,20 +12,33 @@ import RunsList from "./RunsList";
 import { Button, Navbar, Form } from "react-bootstrap";
 import { BsBoxArrowRight, BsPlus } from "react-icons/bs";
 import { Run } from "../Shared/Run";
-import { addUserToRun, subscribeToRuns } from "../Shared/API";
+import {
+  addUserToRun,
+  removeUserFromRun,
+  subscribeToRuns,
+} from "../Shared/API";
 
 const RunsPage: FunctionComponent = (): ReactElement => {
   const auth = useContext(AuthContext);
   const history = useHistory();
-  const [runs, setRuns] = useState(new Array<Run>());
-  const userId = useContext(AuthContext).currentUser?.uid;
+  const [exploreRuns, setExploreRuns] = useState(new Array<Run>());
+  const [myRuns, setMyRuns] = useState(new Array<Run>());
+  const potentialId = useContext(AuthContext).currentUser?.uid;
+  let userId = "";
+  if (typeof potentialId === "string") {
+    userId = potentialId;
+  }
 
-  const handleRunsChanged = (newRuns: Run[]): void => {
-    setRuns(newRuns);
+  const handleExploreRunsChanged = (newRuns: Run[]): void => {
+    setExploreRuns(newRuns);
+  };
+
+  const handleMyRunsChanged = (newRuns: Run[]): void => {
+    setMyRuns(newRuns);
   };
 
   useEffect(() => {
-    subscribeToRuns(handleRunsChanged);
+    subscribeToRuns(handleExploreRunsChanged, handleMyRunsChanged, userId);
   }, []);
 
   const handleLogout = function (): void {
@@ -35,10 +48,22 @@ const RunsPage: FunctionComponent = (): ReactElement => {
   };
 
   const handleGoAlongClicked = (runId: string): void => {
-    if (typeof userId === "string") {
-      addUserToRun(userId, runId);
-    }
+    addUserToRun(userId, runId);
   };
+
+  const handleLeaveClicked = (runId: string): void => {
+    removeUserFromRun(userId, runId);
+  };
+
+  const myRunsList = myRuns.length ? (
+    <RunsList
+      title={"Your runs"}
+      participationButtonText={"Leave"}
+      participationButtonStyle={"danger"}
+      runs={myRuns}
+      participationButtonClicked={handleLeaveClicked}
+    />
+  ) : null;
 
   return (
     <div id={"container"}>
@@ -63,18 +88,12 @@ const RunsPage: FunctionComponent = (): ReactElement => {
         </Form>
         <Navbar.Brand>RunBud</Navbar.Brand>
       </Navbar>
-      <RunsList
-        title={"Your runs"}
-        participationButtonText={"Leave"}
-        participationButtonStyle={"danger"}
-        runs={runs}
-        participationButtonClicked={(id) => {}}
-      />
+      {myRunsList}
       <RunsList
         title={"Explore"}
         participationButtonText={"Go along"}
         participationButtonStyle={"primary"}
-        runs={runs}
+        runs={exploreRuns}
         participationButtonClicked={handleGoAlongClicked}
       />
     </div>
