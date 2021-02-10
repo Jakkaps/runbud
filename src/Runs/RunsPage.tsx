@@ -42,23 +42,26 @@ const RunsPage: FunctionComponent = (): ReactElement => {
 
   return (
     <div id={"container"}>
-      <Navbar
-        className="bg-primary justify-content-between"
-        variant={"dark"}
-        id={"navbar"}
-      >
+      <Navbar className="bg-light justify-content-between" id={"navbar"}>
         <Form inline>
           <Button
             size={"lg"}
             id={"nav-button"}
+            variant={"light"}
             onClick={(): void => history.push("/add")}
           >
             <BsPlus size={30} />
           </Button>
-          <Button size={"lg"} onClick={handleLogout} id={"nav-button"}>
+          <Button
+            size={"lg"}
+            variant={"light"}
+            onClick={handleLogout}
+            id={"nav-button"}
+          >
             <BsBoxArrowRight size={"30"} />
           </Button>
         </Form>
+        <Navbar.Brand>RunBud</Navbar.Brand>
       </Navbar>
       <RunsList
         title={"Your runs"}
