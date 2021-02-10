@@ -3,3 +3,11 @@
     width: 100%;
     display: flex;
 }
+
+#map-spinner-container {
+    display: flex;
+    width: 60%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}

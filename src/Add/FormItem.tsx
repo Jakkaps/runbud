@@ -11,7 +11,7 @@ const FormItem: FunctionComponent<FormItemProps> = ({
 }): ReactElement => {
   return (
     <div id={"form-item-container"}>
-      <h3 id={"form-item-title"}>{title}</h3>
+      <h4 id={"form-item-title"}>{title}</h4>
       {children}
     </div>
   );

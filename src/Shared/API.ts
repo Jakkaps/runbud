@@ -17,6 +17,10 @@ export function addRun(run: Run, userId: string): void {
         max: run.length.max,
       },
       time: run.time.toISOString(),
+      startingPoint: {
+        lat: run.startingPoint.lat,
+        lng: run.startingPoint.lng,
+      },
     });
 
   if (typeof pushedRun.key === "string") {
@@ -79,6 +83,10 @@ export function subscribeToRuns(
               people: people,
               length: r.length,
               id: key,
+              startingPoint: {
+                lat: r.startingPoint.lat,
+                lng: r.startingPoint.lng,
+              },
             });
           } else {
             exploreRuns.push({
@@ -87,6 +95,10 @@ export function subscribeToRuns(
               people: people,
               length: r.length,
               id: key,
+              startingPoint: {
+                lat: r.startingPoint.lat,
+                lng: r.startingPoint.lng,
+              },
             });
           }
         }
