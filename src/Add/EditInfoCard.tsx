@@ -7,7 +7,6 @@ import DateFnsUtils from "@date-io/date-fns";
 import PaceSlider from "./PaceSlider";
 import LengthSlider from "./LengthSlider";
 import { Button } from "react-bootstrap";
-import { BsPlus } from "react-icons/bs";
 import "./EditInfoCard.css";
 
 interface EditInfoProps {
@@ -17,10 +16,12 @@ interface EditInfoProps {
   handleLengthSliderChange: (min: number, max: number) => void;
   handleDateChanged: (value: MaterialUiPickersDate) => void;
   handleAddRunClicked: () => void;
+  handleCancelClicked: () => void;
 }
 
 const EditInfoCard: FunctionComponent<EditInfoProps> = ({
   handleAddRunClicked,
+  handleCancelClicked,
   handlePaceSliderChange,
   handleDateChanged,
   handleLengthSliderChange,
@@ -45,15 +46,19 @@ const EditInfoCard: FunctionComponent<EditInfoProps> = ({
       <FormItem title={"Length (km)"}>
         <LengthSlider length={length} onChange={handleLengthSliderChange} />
       </FormItem>
-      <Button
-        variant={"success"}
-        size={"lg"}
-        id={"add-run-button"}
-        onClick={handleAddRunClicked}
-      >
-        <BsPlus size={"30"} />
-        Add Run
-      </Button>
+      <div id={"buttons-container"}>
+        <Button variant={"danger"} size={"lg"} onClick={handleCancelClicked}>
+          Cancel
+        </Button>
+        <Button
+          variant={"success"}
+          size={"lg"}
+          id={"action-button"}
+          onClick={handleAddRunClicked}
+        >
+          Add Run
+        </Button>
+      </div>
     </div>
   );
 };

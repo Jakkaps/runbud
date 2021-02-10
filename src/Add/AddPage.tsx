@@ -91,6 +91,7 @@ const AddPage: FunctionComponent = (): ReactElement => {
         handleLengthSliderChange={handleLengthSliderChange}
         handleDateChanged={handleDateChanged}
         handleAddRunClicked={handleAddRunClicked}
+        handleCancelClicked={() => history.push("/runs")}
       />
       {map}
     </div>

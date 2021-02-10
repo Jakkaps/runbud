@@ -7,8 +7,14 @@
     justify-content: center;
 }
 
-#add-run-button {
+#action-button {
     width: fit-content;
     display: flex;
     align-items: center;
+    margin-left: 16px;
+}
+
+#buttons-container {
+    width: fit-content;
+    display: flex;
 }
